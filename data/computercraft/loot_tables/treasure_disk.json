@@ -10,37 +10,7 @@
                     "functions": [
                         {
                             "function": "minecraft:set_nbt",
-                            "tag": "{\"Title\": \"alongtimeago by dan200\", \"SubPath\": \"dan200/alongtimeago\", \"Colour\": 14605932}"
-                        }
-                    ]
-                },
-                {
-                    "type": "minecraft:item",
-                    "name": "computercraft:treasure_disk",
-                    "functions": [
-                        {
-                            "function": "minecraft:set_nbt",
-                            "tag": "{\"Title\": \"protector by fredthead\", \"SubPath\": \"fredthead/protector\", \"Colour\": 15790320}"
-                        }
-                    ]
-                },
-                {
-                    "type": "minecraft:item",
-                    "name": "computercraft:treasure_disk",
-                    "functions": [
-                        {
-                            "function": "minecraft:set_nbt",
-                            "tag": "{\"Title\": \"battleship by gopher_atl\", \"SubPath\": \"gopher_atl/battleship\", \"Colour\": 11691749}"
-                        }
-                    ]
-                },
-                {
-                    "type": "minecraft:item",
-                    "name": "computercraft:treasure_disk",
-                    "functions": [
-                        {
-                            "function": "minecraft:set_nbt",
-                            "tag": "{\"Title\": \"luaide by gravity_score\", \"SubPath\": \"gravity_score/luaide\", \"Colour\": 10066329}"
+                            "tag": "{\"Title\": \"gameoflife by vilsol\", \"SubPath\": \"vilsol/gameoflife\", \"Colour\": 15905331}"
                         }
                     ]
                 },
@@ -70,6 +40,16 @@
                     "functions": [
                         {
                             "function": "minecraft:set_nbt",
+                            "tag": "{\"Title\": \"npaintpro by nitrogenfingers\", \"SubPath\": \"nitrogenfingers/npaintpro\", \"Colour\": 3368652}"
+                        }
+                    ]
+                },
+                {
+                    "type": "minecraft:item",
+                    "name": "computercraft:treasure_disk",
+                    "functions": [
+                        {
+                            "function": "minecraft:set_nbt",
                             "tag": "{\"Title\": \"goldrunner by nitrogenfingers\", \"SubPath\": \"nitrogenfingers/goldrunner\", \"Colour\": 15040472}"
                         }
                     ]
@@ -80,7 +60,17 @@
                     "functions": [
                         {
                             "function": "minecraft:set_nbt",
-                            "tag": "{\"Title\": \"npaintpro by nitrogenfingers\", \"SubPath\": \"nitrogenfingers/npaintpro\", \"Colour\": 3368652}"
+                            "tag": "{\"Title\": \"protector by fredthead\", \"SubPath\": \"fredthead/protector\", \"Colour\": 15790320}"
+                        }
+                    ]
+                },
+                {
+                    "type": "minecraft:item",
+                    "name": "computercraft:treasure_disk",
+                    "functions": [
+                        {
+                            "function": "minecraft:set_nbt",
+                            "tag": "{\"Title\": \"luaide by gravity_score\", \"SubPath\": \"gravity_score/luaide\", \"Colour\": 10066329}"
                         }
                     ]
                 },
@@ -100,7 +90,17 @@
                     "functions": [
                         {
                             "function": "minecraft:set_nbt",
-                            "tag": "{\"Title\": \"gameoflife by vilsol\", \"SubPath\": \"vilsol/gameoflife\", \"Colour\": 15905331}"
+                            "tag": "{\"Title\": \"battleship by gopher_atl\", \"SubPath\": \"gopher_atl/battleship\", \"Colour\": 11691749}"
+                        }
+                    ]
+                },
+                {
+                    "type": "minecraft:item",
+                    "name": "computercraft:treasure_disk",
+                    "functions": [
+                        {
+                            "function": "minecraft:set_nbt",
+                            "tag": "{\"Title\": \"alongtimeago by dan200\", \"SubPath\": \"dan200/alongtimeago\", \"Colour\": 14605932}"
                         }
                     ]
                 }
