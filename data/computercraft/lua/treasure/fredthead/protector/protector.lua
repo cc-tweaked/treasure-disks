@@ -290,13 +290,13 @@ function newHighScoreObtained()
 			newNameStrLen=newNameStrLen+1
 			printCent(14,newNameStr.." ")
 
-		elseif event=="key" and p1 == 14 and newNameStrLen>0 then
+		elseif event=="key" and p1 == keys.backspace and newNameStrLen>0 then
 			newNameStr=string.sub(newNameStr,1,string.len(newNameStr)-1)
 			newNameStrLen=newNameStrLen-1
 			term.setCursorPos(1,14)
 			write(string.rep(" ",w))
 			printCent(14,newNameStr.." ")
-		elseif event=="key" and p1== 28 then
+		elseif event=="key" and p1== keys.enter then
 			newName = newNameStr
 			newScore = score
 			rewriteScores()
@@ -1034,7 +1034,7 @@ function startScreen()
 	screenTimer=os.startTimer(0.1)
 	while true do
 		local event,p1,p2,p3=os.pullEvent()
-		if event=="key"and p1==57 then
+		if event=="key"and p1==keys.space then
 			term.setBackgroundColour(colours.black)
 			clear()
 			runGame()

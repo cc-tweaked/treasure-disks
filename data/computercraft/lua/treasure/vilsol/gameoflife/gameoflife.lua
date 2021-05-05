@@ -114,17 +114,17 @@ function loop()
 			end
 		end
 		if event == "key" then
-			if tostring(variable) == "28" then
+			if variable == keys.enter then
 				return true
-			elseif tostring(variable) == "57" then
+			elseif variable == keys.space then
 				if(mon.isColor() or mon.isColor)then
 					colored = not colored
 				end
-			elseif tostring(variable) == "200" then
+			elseif variable == keys.up then
 				if sleeptime > 0.1 then
 					sleeptime = sleeptime - 0.1
 				end
-			elseif tostring(variable) == "208" then
+			elseif variable == keys.down then
 				if sleeptime < 1 then
 					sleeptime = sleeptime + 0.1
 				end

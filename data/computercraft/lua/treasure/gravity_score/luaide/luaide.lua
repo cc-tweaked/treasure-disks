@@ -349,14 +349,14 @@ local function prompt(list, dir, isGrid)
 		end
 	end
 
-	local key1 = dir == "horizontal" and 203 or 200
-	local key2 = dir == "horizontal" and 205 or 208
+	local key1 = dir == "horizontal" and keys.left or keys.up
+	local key2 = dir == "horizontal" and keys.right or keys.down
 	local sel = 1
 	draw(sel)
 
 	while true do
 		local e, but, x, y = os.pullEvent()
-		if e == "key" and but == 28 then
+		if e == "key" and but == keys.enter then
 			return list[sel][1]
 		elseif e == "key" and but == key1 and sel > 1 then
 			sel = sel - 1
@@ -364,10 +364,10 @@ local function prompt(list, dir, isGrid)
 		elseif e == "key" and but == key2 and ((err == true and sel < #list - 1) or (sel < #list)) then
 			sel = sel + 1
 			draw(sel)
-		elseif isGrid and e == "key" and but == 203 and sel > 2 and #list == 4 then
+		elseif isGrid and e == "key" and but == keys.left and sel > 2 and #list == 4 then
 			sel = sel - 2
 			draw(sel)
-		elseif isGrid and e == "key" and but == 205 and sel < 3 and #list == 4 then
+		elseif isGrid and e == "key" and but == keys.right and sel < 3 and #list == 4 then
 			sel = sel + 2
 			draw(sel)
 		elseif e == "mouse_click" then
@@ -431,7 +431,7 @@ local function scrollingPrompt(list)
 			for i, v in ipairs(disList) do
 				if x >= 3 and x <= w - 11 and y >= i * 4 + 3 and y <= i * 4 + 5 then return v end
 			end
-		elseif e == "key" and key == 200 then
+		elseif e == "key" and key == keys.up then
 			if sel > 1 then
 				sel = sel - 1
 				draw(disList, sel, loc)
@@ -440,7 +440,7 @@ local function scrollingPrompt(list)
 				disList = updateDisplayList(list, loc, len)
 				draw(disList, sel, loc)
 			end
-		elseif e == "key" and key == 208 then
+		elseif e == "key" and key == keys.down then
 			if sel < len then
 				sel = sel + 1
 				draw(disList, sel, loc)
@@ -450,8 +450,8 @@ local function scrollingPrompt(list)
 				draw(disList, sel, loc)
 			end
 		elseif e == "mouse_scroll" then
-			os.queueEvent("key", key == -1 and 200 or 208)
-		elseif e == "key" and key == 28 then
+			os.queueEvent("key", key == -1 and keys.up or keys.down)
+		elseif e == "key" and key == keys.enter then
 			return disList[sel]
 		end
 	end
@@ -463,10 +463,10 @@ function monitorKeyboardShortcuts()
 	local shiftPressed = false
 	while true do
 		local event, char = os.pullEvent()
-		if event == "key" and (char == 42 or char == 52) then
+		if event == "key" and (char == keys.leftShift or char == keys.rightShift) then
 			shiftPressed = true
 			tb = os.startTimer(keyboardShortcutTimeout)
-		elseif event == "key" and (char == 29 or char == 157 or char == 219 or char == 220) then
+		elseif event == "key" and (char == keys.leftCtrl or char == keys.rightCtrl) then
 			allowEditorEvent = false
 			allowChar = true
 			ta = os.startTimer(keyboardShortcutTimeout)
@@ -1296,8 +1296,8 @@ local menuFunctions = {
 			return nil, lines
 		end
 	end,
-	["Start of Line ^+<"] = function() os.queueEvent("key", 199) end,
-	["End of Line   ^+>"] = function() os.queueEvent("key", 207) end,
+	["Start of Line ^+<"] = function() os.queueEvent("key", keys.home) end,
+	["End of Line   ^+>"] = function() os.queueEvent("key", keys.end) end,
 
 	-- Run
 	["Run Program       ^+R"] = function(path, lines)

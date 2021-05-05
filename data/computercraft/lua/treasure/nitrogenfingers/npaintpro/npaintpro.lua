@@ -1290,11 +1290,11 @@ local function readInput(lim)
 		local id,key = os.pullEvent()
 
 		if keysAllowed then
-			if id == "key" and key == 14 and #inputString > 0 then
+			if id == "key" and key == keys.backspace and #inputString > 0 then
 				inputString = string.sub(inputString, 1, #inputString-1)
 				term.setCursorPos(ox + #inputString,oy)
 				term.write(" ")
-			elseif id == "key" and key == 28 and inputString ~= string.rep(" ", #inputString) then
+			elseif id == "key" and key == keys.enter and inputString ~= string.rep(" ", #inputString) then
 				break
 			elseif id == "key" and key == keys.leftCtrl then
 				return ""
