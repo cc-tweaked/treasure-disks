@@ -8,9 +8,9 @@ This data pack restores this functionality, and may be used as a template to
 register your own loot disks.
 
 ## Usage
- - This pack requires Minecraft 1.15 and the latest version of CC: Tweaked
- - [Download this repository](https://github.com/SquidDev-CC/treasure-disks/archive/master.zip)
- - Save it to the `datapacks` folder of your current Minecraft save.
+This pack requires Minecraft 1.20 or later. Head to 
+[datapacks.madefor.cc](https://datapacks.madefor.cc) and select the
+"Treasure Disks" option.
 
 ## Reporting bugs
 These programs haven't been tested and updated for a long time (since 2016), and
