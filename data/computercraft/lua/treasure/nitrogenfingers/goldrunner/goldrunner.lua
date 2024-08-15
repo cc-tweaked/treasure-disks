@@ -148,7 +148,7 @@ local function loadMap(_sPath)
   goldCount = 0
 
   local file = fs.open(_sPath, "r")
-  local line = file:readLine()
+  local line = file.readLine()
   while line do
     goldMap[#map+1] = {}
     map[#map+1] = {}
@@ -157,9 +157,9 @@ local function loadMap(_sPath)
       parseValue(i, #map, lchar)
     end
     if #map == 18 then break end
-    line = file:readLine()
+    line = file.readLine()
   end
-  file:close()
+  file.close()
   maxGoldCount = goldCount
   titleLoaded = false
   return true
@@ -1158,8 +1158,10 @@ local function runTitle()
 	until menSel ~= "none"
 end
 
+local levelDir = fs.combine(shell.getRunningProgram(), "../levels")
+
 local function playLevel()
-	loadMap(shell.resolve(".").."/levels/"..levelList[currentLevel])
+	loadMap(fs.combine(levelDir, levelList[currentLevel]))
 	running = true
 	while running do
 		drawMap()
@@ -1222,10 +1224,11 @@ local function playLevel()
 end
 
 term.clear()
-if not fs.exists(shell.resolve(".").."/levels") then
+
+if not fs.exists(levelDir) then
 	error("Level directory not present!")
 end
-levelList = fs.list(shell.resolve(".").."/levels")
+levelList = fs.list(levelDir)
 if #levelList == 0 then
 	error("Level directory is empty!")
 end
@@ -1280,7 +1283,7 @@ while menSel ~= "Quit" do
 
 		if menSel == "Play Level" then
 			currentLevel = nil
-			levelList = fs.list(shell.resolve(".").."/levels")
+			levelList = fs.list(levelDir)
 			for num,name in pairs(levelList) do
 				if name == levelName then
 					currentLevel = num

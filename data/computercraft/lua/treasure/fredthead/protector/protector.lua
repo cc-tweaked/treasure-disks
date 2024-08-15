@@ -638,19 +638,19 @@ function alienUp()
 end
 
 function keyPress()  -- 200 UP, 208 DOWN, 203 LEFT,  205 RIGHT,  57 SPACE, 16 Q
-		if pressedKey==200 or pressedKey == 17 then -- up
+		if pressedKey==keys.up or pressedKey == keys.w then -- up
 			moveUp=true
 			moveDown=false
-		elseif pressedKey==208 or pressedKey == 31 then -- DOWN
+		elseif pressedKey==keys.down or pressedKey == 31 then -- DOWN
 			moveDown=true
 			moveUp=false
-		elseif pressedKey==203 or pressedKey == 30 then -- left
+		elseif pressedKey==keys.left or pressedKey == keys.a then -- left
 			moveLeft=true
 			moveRight=false
-		elseif pressedKey==205 or pressedKey == 32 then -- right
+		elseif pressedKey==keys.right or pressedKey == keys.d then -- right
 			moveRight=true
 			moveLeft=false
-		elseif pressedKey==57 then -- space
+		elseif pressedKey==keys.space then -- space
 				if bulletState==false then
 					bulletYPos=shipYPos
 					bulletState=true
@@ -662,7 +662,7 @@ function keyPress()  -- 200 UP, 208 DOWN, 203 LEFT,  205 RIGHT,  57 SPACE, 16 Q
 						bulletGoingRight=false
 					end
 				end
-		elseif pressedKey==25 then -- q  (use 25 if p for quit)
+		elseif pressedKey==keys.q then -- q  (use 25 if p for quit)
 				gameOver("YOU QUIT")
 		end
 
