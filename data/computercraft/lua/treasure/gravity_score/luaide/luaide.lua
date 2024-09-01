@@ -1256,8 +1256,8 @@ local shortcuts = {
 	["ctrl g"] = "Go To Line    ^+G",
 	["ctrl i"] = "Re-Indent     ^+I",
 	["ctrl e"] = "Set Syntax    ^+E",
-	["ctrl 203"] = "Start of Line ^+<",
-	["ctrl 205"] = "End of Line   ^+>",
+	["ctrl left"] = "Start of Line ^+<",
+	["ctrl right"] = "End of Line   ^+>",
 
 	-- Run
 	["ctrl r"] = "Run Program       ^+R",
