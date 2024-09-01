@@ -175,7 +175,7 @@ local function modRead(properties)
 				redraw()
 			elseif properties.exitOnKey then
 				if but == properties.exitOnKey or (properties.exitOnKey == "control" and
-						(but == 29 or but == 157)) then
+						(but == keys.leftCtrl or but == keys.rightCtrl)) then
 					term.setCursorBlink(false)
 					return nil
 				end
@@ -1001,17 +1001,17 @@ local function setsyntax()
 	term.write(opts[sel])
 	while true do
 		local e, but, x, y = os.pullEvent("key")
-		if but == 203 then
+		if but == keys.left then
 			sel = math.max(1, sel - 1)
 			term.setCursorPos(2, 1)
 			term.clearLine()
 			term.write(opts[sel])
-		elseif but == 205 then
+		elseif but == keys.right then
 			sel = math.min(#opts, sel + 1)
 			term.setCursorPos(2, 1)
 			term.clearLine()
 			term.write(opts[sel])
-		elseif but == 28 then
+		elseif but == keys.enter or but == keys.numPadEnter then
 			if sel == 1 then curLanguage = languages.lua
 			elseif sel == 2 then curLanguage = languages.brainfuck
 			elseif sel == 3 then curLanguage = languages.none end
@@ -1256,8 +1256,8 @@ local shortcuts = {
 	["ctrl g"] = "Go To Line    ^+G",
 	["ctrl i"] = "Re-Indent     ^+I",
 	["ctrl e"] = "Set Syntax    ^+E",
-	["ctrl 203"] = "Start of Line ^+<",
-	["ctrl 205"] = "End of Line   ^+>",
+	["ctrl left"] = "Start of Line ^+<",
+	["ctrl right"] = "End of Line   ^+>",
 
 	-- Run
 	["ctrl r"] = "Run Program       ^+R",
@@ -1297,7 +1297,7 @@ local menuFunctions = {
 		end
 	end,
 	["Start of Line ^+<"] = function() os.queueEvent("key", keys.home) end,
-	["End of Line   ^+>"] = function() os.queueEvent("key", keys.end) end,
+	["End of Line   ^+>"] = function() os.queueEvent("key", keys["end"]) end,
 
 	-- Run
 	["Run Program       ^+R"] = function(path, lines)
@@ -1657,29 +1657,29 @@ local function edit(path)
 	while true do
 		local e, key, cx, cy = os.pullEvent()
 		if e == "key" and allowEditorEvent then
-			if key == 200 and y > 1 then
+			if key == keys.up and y > 1 then
 				-- Up
 				x, y = math.min(x, lines[y - 1]:len() + 1), y - 1
 				drawLine(y, y + 1)
 				cursorLoc(x, y)
-			elseif key == 208 and y < #lines then
+			elseif key == keys.down and y < #lines then
 				-- Down
 				x, y = math.min(x, lines[y + 1]:len() + 1), y + 1
 				drawLine(y, y - 1)
 				cursorLoc(x, y)
-			elseif key == 203 and x > 1 then
+			elseif key == keys.left and x > 1 then
 				-- Left
 				x = x - 1
 				local force = false
 				if y - scrolly + offy < offy + 1 then force = true end
 				cursorLoc(x, y, force)
-			elseif key == 205 and x < lines[y]:len() + 1 then
+			elseif key == keys.right and x < lines[y]:len() + 1 then
 				-- Right
 				x = x + 1
 				local force = false
 				if y - scrolly + offy < offy + 1 then force = true end
 				cursorLoc(x, y, force)
-			elseif (key == 28 or key == 156) and (displayCode and true or y + scrolly - 1 ==
+			elseif (key == keys.enter or key == keys.numPadEnter or key == 156) and (displayCode and true or y + scrolly - 1 ==
 					liveErr.line) then
 				-- Enter
 				local f = nil
@@ -1707,7 +1707,7 @@ local function edit(path)
 					x, y = spaces + 1, y + 1
 					cursorLoc(x, y, true)
 				end
-			elseif key == 14 and (displayCode and true or y + scrolly - 1 == liveErr.line) then
+			elseif key == keys.backspace and (displayCode and true or y + scrolly - 1 == liveErr.line) then
 				-- Backspace
 				if x > 1 then
 					local f = false
@@ -1726,19 +1726,19 @@ local function edit(path)
 					x, y = prevLen, y - 1
 					cursorLoc(x, y, true)
 				end
-			elseif key == 199 then
+			elseif key == keys.home then
 				-- Home
 				x = 1
 				local force = false
 				if y - scrolly + offy < offy + 1 then force = true end
 				cursorLoc(x, y, force)
-			elseif key == 207 then
+			elseif key == keys["end"] then
 				-- End
 				x = lines[y]:len() + 1
 				local force = false
 				if y - scrolly + offy < offy + 1 then force = true end
 				cursorLoc(x, y, force)
-			elseif key == 211 and (displayCode and true or y + scrolly - 1 == liveErr.line) then
+			elseif key == keys.delete and (displayCode and true or y + scrolly - 1 == liveErr.line) then
 				-- Forward Delete
 				if x < lines[y]:len() + 1 then
 					lines[y] = lines[y]:sub(1, x - 1) .. lines[y]:sub(x + 1)
@@ -1752,7 +1752,7 @@ local function edit(path)
 					draw()
 					cursorLoc(x, y)
 				end
-			elseif key == 15 and (displayCode and true or y + scrolly - 1 == liveErr.line) then
+			elseif key == keys.tab and (displayCode and true or y + scrolly - 1 == liveErr.line) then
 				-- Tab
 				lines[y] = string.rep(" ", tabWidth) .. lines[y]
 				x = x + 2
@@ -1760,12 +1760,12 @@ local function edit(path)
 				if y - scrolly + offy < offy + 1 then force = true end
 				drawLine(y)
 				cursorLoc(x, y, force)
-			elseif key == 201 then
+			elseif key == keys.pageUp then
 				-- Page up
 				y = math.min(math.max(y - edh, 1), #lines)
 				x = math.min(lines[y]:len() + 1, x)
 				cursorLoc(x, y, true)
-			elseif key == 209 then
+			elseif key == keys.pageDown then
 				-- Page down
 				y = math.min(math.max(y + edh, 1), #lines)
 				x = math.min(lines[y]:len() + 1, x)

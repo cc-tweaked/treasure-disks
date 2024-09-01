@@ -62,7 +62,7 @@ end
 -- function thanks to Mads... found here: http://www.computercraft.info/forums2/index.php?/topic/11771-print-coloured-text-easily/page__p__105389#entry105389
 local function writeWithFormat(...)
   local s = "&0"
-  for k, v in ipairs(arg) do
+  for k, v in ipairs({...}) do
     s = s .. v
   end
   s = s .. "&0"
@@ -392,9 +392,9 @@ local function main(arc, argv)
       writeAt("Press 'R' to play again, 'Q' to quit...", 3, sh - 1)
       while true do
         local _, k = os.pullEvent('key')
-        if k == 16 then
+        if k == keys.q then
           break
-        elseif k == 19 then
+        elseif k == keys.r then
           reset() -- reset the game
           render() -- render the new game ready to wait for input
           break
